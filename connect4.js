@@ -104,7 +104,6 @@ function handleClick(evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-
   if (
     board
       .join()
