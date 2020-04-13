@@ -58,14 +58,19 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  if (board[0][x] !== null) {
+    return null;
+  }
+  for (let i = HEIGHT - 1; i >= 0; i--) {
+    if (board[i][x] === null) {
+      return i;
+    }
+  }
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
   let marker = document.createElement("div");
   marker.classList.add("piece", "p2"); // may want to remove p1..
   let position = document.getElementById(`${y}-${x}`);
