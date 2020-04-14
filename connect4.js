@@ -17,8 +17,8 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 function makeBoard() {
   //create HEIGHT# of arrays with length of WIDTH (push HEIGHT times)
-  let row = Array.from({ length: WIDTH });
   for (let i = 0; i < HEIGHT; i++) {
+    let row = Array.from({ length: WIDTH });
     board.push(row);
   }
   return board;
@@ -69,29 +69,20 @@ function findSpotForCol(x) {
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
-// function placeInTable(y, x) {
-//   const marker = document.createElement("div");
-//   marker.classList.add("piece"); // may want to remove p1..
-//   piece.classList.add(`p${currPlayer}`);
-//   const position = document.getElementById(`${y}-${x}`);
-//   position.append(marker);
-// }
-/** placeInTable: update DOM to place piece into HTML table of board */
-
 function placeInTable(y, x) {
-  const piece = document.createElement("div");
-  piece.classList.add("piece");
-  piece.classList.add(`p${currPlayer}`);
-  // piece.style.top = -50 * (y + 2);
-
-  const spot = document.getElementById(`${y}-${x}`);
-  spot.append(piece);
+  const marker = document.createElement("div");
+  marker.classList.add("piece"); // may want to remove p1..
+  marker.classList.add(`p${currPlayer}`);
+  const position = document.getElementById(`${y}-${x}`);
+  position.append(marker);
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
-  alert(`${msg}`);
+  setTimeout(function () {
+    alert(`${msg}`);
+  }, 300);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -113,18 +104,18 @@ function handleClick(evt) {
   // board[y][x] = currPlayer;
 
   // check for win
-  // if (checkForWin()) {
-  //   return endGame(`Player ${currPlayer} won!`);
-  // }
+  if (checkForWin()) {
+    return endGame(`Player ${currPlayer} won!`);
+  }
 
-  // if (
-  //   board
-  //     .join()
-  //     .split(",")
-  //     .every((val) => val == 1 || val == 2)
-  // ) {
-  //   return endGame("It's a tie!");
-  // }
+  if (
+    board
+      .join()
+      .split(",")
+      .every((val) => val == 1 || val == 2)
+  ) {
+    return endGame("It's a tie!");
+  }
 
   // switch players:
   currPlayer === 1 ? (currPlayer = 2) : (currPlayer = 1);
